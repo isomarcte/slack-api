@@ -20,6 +20,8 @@ Maintainer:          matthewtpickering@gmail.com
 Stability:           Experimental
 Category:            Web
 Build-type:          Simple
+-- Exclude 8.2.1 due to GHC panic
+Tested-With:         GHC (>= 8.0.1 && < 8.2.1) || > 8.2.1
 Cabal-version:       >=1.10
 source-repository head
     type: git
