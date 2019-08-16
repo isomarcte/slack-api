@@ -143,7 +143,7 @@ getNextEvent h@SlackHandle{..} = do
         Right event@(UnknownEvent val) -> do
             putStrLn $ unlines
                 [ show val
-                , "Failed to parse to a known event"
+                , "Failed to parse to a event"
                 , "Please report this failure to the github issue tracker"
                 ]
             return event
