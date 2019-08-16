@@ -16,6 +16,7 @@ import Web.Slack.Types.Event.Subtype
 import Web.Slack.Types.Time
 import Web.Slack.Types.Presence
 import Web.Slack.Types.Subteam
+import Web.Slack.Types.MemberJoinedChannelInfo
 
 import Data.Aeson
 import Data.Aeson.Types
@@ -71,6 +72,7 @@ data Event where
   ImMarked :: IMId -> SlackTimeStamp -> Event
   ImOpen :: UserId -> IMId -> Event
   ManualPresenceChange :: Presence -> Event
+  MemberJoinedChannel :: MemberJoinedChannelInfo -> Event
   Message :: ChannelId -> Submitter -> Text -> SlackTimeStamp -> Maybe Subtype -> Maybe Edited -> Event
   MessageError :: Int -> SlackError -> Event
   MessageResponse :: Int -> SlackTimeStamp -> Text -> Event
@@ -159,6 +161,7 @@ parseType o@(Object v) typ =
       "im_marked" -> ImMarked <$> v .: "channel" <*> v .: "ts"
       "im_open"     -> ImOpen <$> v .: "user" <*> v .: "channel"
       "manual_presence_change" -> ManualPresenceChange <$> v .: "presence"
+      "member_joined_channel" -> MemberJoinedChannel <$> parseJSON o
       "message" -> do
         subt <- (\case
                   Nothing -> return Nothing
