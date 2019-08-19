@@ -48,7 +48,7 @@ instance FromJSON EmbeddedItem where
                   _              -> fail $ "Unrecognised item type: " ++ typ
 
 data MessageUpdate = MessageUpdate
-                   { _messageUpdateUser   :: UserId
+                   { _messageUpdateUser   :: Maybe UserId
                    , _messageUpdateText   :: Text
                    , _messageUpdateTime   :: SlackTimeStamp
                    , _messageUpdateEdited :: Maybe Edited
